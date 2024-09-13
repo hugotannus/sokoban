@@ -19,8 +19,8 @@ main {
 
 .board{
     display: block;
-    min-height: 0.25wh;
-    min-width: 0.25wh;
+    min-height: min(8.75vh, 6.25vw);
+    min-width: min(8.75vh, 6.25vw);
     padding: 2px 3px;
 
     border: solid 8px #484848;
