@@ -11,7 +11,10 @@ main {
 }
 
 #game{
-    display: block;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
 }
 
 .board{
@@ -24,7 +27,7 @@ main {
     border-radius: 8px;
     box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.40);
 
-    background-color: grey;
+    background-color: dimgray;
 }
 
 .row {
@@ -41,7 +44,7 @@ main {
 
     border-radius: 2px;
 
-    background-color: aliceblue;
+    background-color:ghostwhite;
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
 }
 
@@ -49,3 +52,8 @@ main {
     background-color: unset;
     box-shadow: none;
 }
+
+.box { background-color: chocolate; }
+.goal { background-color: burlywood; }
+.wall { background-color: darkgray; }
+.player { background-color: forestgreen; }
