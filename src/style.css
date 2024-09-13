@@ -19,8 +19,8 @@ main {
 
 .board{
     display: block;
-    min-height: 256px;
-    min-width: 256px;
+    min-height: 0.25wh;
+    min-width: 0.25wh;
     padding: 2px 3px;
 
     border: solid 8px #505050;
@@ -38,8 +38,8 @@ main {
 }
 
 .cell {
-    height: 64px;
-    width: 64px;
+    height: min(8.75vh, 6.25vw);
+    width: min(8.75vh, 6.25vw);
     margin: 0 1px;
 
     border-radius: 2px;
