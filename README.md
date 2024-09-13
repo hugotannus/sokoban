@@ -11,8 +11,8 @@
         - Espessura: `8px`;
         - Raio: `8px`;
     - Cores:
-        - Borda: `#505050`;
-        - Plano de fundo: cinza;
+        - Borda: `#484848`;
+        - Plano de fundo: `dimgray`;
     - Aplicar sombreamento
 - Células:
     - Dimensões:
@@ -21,8 +21,9 @@
     - Bordas:
         - Não deve aparecer
         - Raio: `2px`;
+	- Cor: `ghostwhite`;
 - _Assets_:
-    - Jogador: `rgb(96, 192, 96)`;
-    - Blocos: `rgb(240, 144, 0)`;
-    - Objetivos: `rgb(200, 220, 240)`;
-    - Paredes / Fronteiras: `rgb(184, 184, 184)`;
+    - Jogador: `forestgreen`;
+    - Blocos: `chocolate`;
+    - Objetivos: `burlywood`;
+    - Paredes / Fronteiras: `darkgray`;
