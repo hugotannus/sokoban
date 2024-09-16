@@ -69,8 +69,8 @@ main {
 .player {
     position: absolute;
     z-index: 10;
-    top: 2px;
-    left: 2px;
+    top: 4px;
+    left: 4px;
     box-sizing: border-box;
 
     background-color: forestgreen;
