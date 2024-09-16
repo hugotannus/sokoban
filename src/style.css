@@ -25,6 +25,7 @@ main {
     min-width: min(3vh, 2vw);
     margin: 24px;
     padding: 2px 3px;
+    position: relative;
 
     border: solid 8px #484848;
     border-radius: 8px;
@@ -44,6 +45,7 @@ main {
     height: min(7vh, 5vw);
     width: min(7vh, 5vw);
     margin: 0 1px;
+    box-sizing: border-box;
 
     border-radius: 2px;
 
@@ -63,4 +65,17 @@ main {
 .box { background-color: chocolate; }
 .goal { background-color: burlywood; }
 .wall { background-color: darkgray; }
-.player { background-color: forestgreen; }
+
+.player {
+    position: absolute;
+    z-index: 10;
+    top: 2px;
+    left: 2px;
+    box-sizing: border-box;
+
+    background-color: forestgreen;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    border: solid 8px rgba(0, 0, 0, 0.40);
+}
