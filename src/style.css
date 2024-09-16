@@ -26,7 +26,7 @@ main {
     margin: 24px;
     padding: 2px 3px;
     position: relative;
-
+    
     border: solid 8px #484848;
     border-radius: 8px;
     box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.40);
@@ -46,9 +46,9 @@ main {
     width: min(7vh, 5vw);
     margin: 0 1px;
     box-sizing: border-box;
-
+    
     border-radius: 2px;
-
+    
     background-color:ghostwhite;
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
 }
@@ -72,10 +72,15 @@ main {
     top: 4px;
     left: 4px;
     box-sizing: border-box;
-
+    
     background-color: forestgreen;
     height: 64px;
     width: 64px;
     border-radius: 50%;
     border: solid 8px rgba(0, 0, 0, 0.40);
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
+
+    transition:
+        left 150ms ease-in-out 50ms,
+        top 150ms ease-in-out 50ms;
 }
