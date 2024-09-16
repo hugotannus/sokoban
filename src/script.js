@@ -1,12 +1,21 @@
 const tabuleiro = document.getElementById('board2');
 
-const linha = document.createElement('div');
-linha.classList.add('row');
-
-for(let i=0; i<4; i++) {
-    const celula = document.createElement('div');
-    celula.classList.add('cell');
-    linha.append(celula);
+function appendBlockTo(parent, childClass) {
+    const element = document.createElement('div');
+    element.classList.add(childClass);
+    parent.append(element);
+    
+    return element;
 }
 
-tabuleiro.append(linha);
+function createBoard(numberOfRows, numberOfCollumns) {
+    for(let k=0; k < numberOfRows; k++) {
+        const linha = appendBlockTo(tabuleiro, 'row');
+        
+        for(let i=0; i < numberOfCollumns; i++) {
+            appendBlockTo(linha, 'cell');
+        }
+    }
+}
+
+createBoard(6, 6);
