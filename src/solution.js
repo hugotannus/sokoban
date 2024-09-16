@@ -22,6 +22,11 @@ window.addEventListener("keydown", function(event){
     }
 })
 
+function setInitialPlayerPosition(player, x, y) {
+    player.style.left= `${4 + x * STEP_LEN}px`;
+    player.style.top = `${4 + y * STEP_LEN}px`;
+}
+
 function findNextPosition(position, direction) {
     let x = Number(position.x.split('px')[0]);
     let y = Number(position.y.split('px')[0]);
@@ -49,9 +54,6 @@ function renderBoard(boardMap) {
     const board2 = document.getElementById('board2');
     const player = createElement('div', ['player']);
     
-    player.style.left = "3px";
-    player.style.top = "3px";
-    
     board2.append(player);
 
     for (let k = 0; k < boardMap.length; k++) {
@@ -63,10 +65,12 @@ function renderBoard(boardMap) {
             const classList = ['cell'];
             
             if(cell == "#") classList.push('wall');
-            // if(cell == "P") classList.push('player');
             if(cell == "G") classList.push('goal');
             if(cell == "B") classList.push('box');
-            
+            if(cell == "P") {
+                setInitialPlayerPosition(player, j, k);
+            }
+
             const cellElement = createElement('div', classList);
         
             rowElement.appendChild(cellElement);
