@@ -1,5 +1,5 @@
 body {
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -7,11 +7,12 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: inherit;
+    min-height: inherit;
 }
 
 #game{
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
     align-items: center;
@@ -21,6 +22,7 @@ main {
     display: block;
     min-height: min(8.75vh, 6.25vw);
     min-width: min(8.75vh, 6.25vw);
+    margin: 24px;
     padding: 2px 3px;
 
     border: solid 8px #484848;
