@@ -12,7 +12,8 @@ main {
 
 #game{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     width: 100%;
     align-items: center;
@@ -20,8 +21,8 @@ main {
 
 .board{
     display: block;
-    min-height: min(8.75vh, 6.25vw);
-    min-width: min(8.75vh, 6.25vw);
+    min-height: min(3vh, 2vw);
+    min-width: min(3vh, 2vw);
     margin: 24px;
     padding: 2px 3px;
 
@@ -40,8 +41,8 @@ main {
 }
 
 .cell {
-    height: min(8.75vh, 6.25vw);
-    width: min(8.75vh, 6.25vw);
+    height: min(7vh, 5vw);
+    width: min(7vh, 5vw);
     margin: 0 1px;
 
     border-radius: 2px;
@@ -53,6 +54,10 @@ main {
 .empty { 
     background-color: unset;
     box-shadow: none;
+}
+
+.flag {
+    background-color: rgba(240,60,30, 0.4);
 }
 
 .box { background-color: chocolate; }
