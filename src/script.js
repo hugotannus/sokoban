@@ -1,20 +1,20 @@
 buildGameBoard(8, 8, rule1);
-buildGameBoard(8, 8, rule2);
-buildGameBoard(8, 8, rule11);
-buildGameBoard(8, 8, rule12);
-buildGameBoard(8, 8, rule13);
-buildGameBoard(8, 8, rule14);
-buildGameBoard(8, 8, rule15);
-buildGameBoard(8, 8, rule16);
-buildGameBoard(8, 8, rule5);
-buildGameBoard(8, 8, rule6);
-buildGameBoard(8, 8, rule7);
-buildGameBoard(8, 8, rule8);
-buildGameBoard(8, 8, rule9);
-buildGameBoard(8, 8, rule3);
-buildGameBoard(8, 8, rule4);
-buildGameBoard(8, 8, rule10);
-buildGameBoard(8, 8, rule0);
+// buildGameBoard(8, 8, rule2);
+// buildGameBoard(8, 8, rule11);
+// buildGameBoard(8, 8, rule12);
+// buildGameBoard(8, 8, rule13);
+// buildGameBoard(8, 8, rule14);
+// buildGameBoard(8, 8, rule15);
+// buildGameBoard(8, 8, rule16);
+// buildGameBoard(8, 8, rule5);
+// buildGameBoard(8, 8, rule6);
+// buildGameBoard(8, 8, rule7);
+// buildGameBoard(8, 8, rule8);
+// buildGameBoard(8, 8, rule9);
+// buildGameBoard(8, 8, rule3);
+// buildGameBoard(8, 8, rule4);
+// buildGameBoard(8, 8, rule10);
+// buildGameBoard(8, 8, rule0);
 
 function buildGameBoard(numRows, numCols, regra) {
     const game = document.getElementById("game");

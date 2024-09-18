@@ -42,8 +42,8 @@ main {
 }
 
 .cell {
-    height: min(7vh, 5vw);
-    width: min(7vh, 5vw);
+    height: min(5vw, 48px);
+    width: min(5vw, 48px);
     margin: 0 1px;
     box-sizing: border-box;
     
