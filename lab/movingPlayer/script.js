@@ -6,11 +6,10 @@ const directions = {
     "ArrowRight":   { x: 1, y: 0},
     "ArrowLeft":    { x:-1, y: 0},
     "ArrowUp":      { x: 0, y:-1},
-    "ArrowDown":     { x: 0, y: 1},
+    "ArrowDown":    { x: 0, y: 1},
 }
 
 window.addEventListener("keydown", function(event){
-    // console.log(event.code);
     const player = document.querySelector('.player');
 
     if(Object.keys(directions).includes(event.code)) {

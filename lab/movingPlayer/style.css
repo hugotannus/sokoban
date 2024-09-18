@@ -27,11 +27,12 @@ main {
     padding: 2px 3px;
     position: relative;
     
-    border: solid 8px #484848;
+    border: solid 8px rgb(57, 27, 16);
     border-radius: 8px;
-    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.40);
+    box-shadow: 5px 5px 3px rgba(130, 47, 17, 0.4);
 
-    background-color: dimgray;
+    /* background-color: dimgray; */
+    background: linear-gradient(90deg, hsla(42, 93%, 57%, 1) 0%, hsla(358, 78%, 62%, 1) 100%);
 }
 
 .row {
@@ -73,13 +74,13 @@ main {
     left: 4px;
     box-sizing: border-box;
     
-    background-color: forestgreen;
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    border: solid 8px rgba(0, 0, 0, 0.40);
+    border: solid 8px rgb(39, 54, 39);
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
-
+    background: linear-gradient(90deg, hsla(97, 56%, 42%, 1) 0%, hsla(92, 55%, 62%, 1) 100%);
+    
     transition:
         left 150ms ease-in-out 50ms,
         top 150ms ease-in-out 50ms;
