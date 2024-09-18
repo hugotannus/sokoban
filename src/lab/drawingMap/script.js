@@ -8,7 +8,6 @@ const directions = {
 }
 
 window.addEventListener("keydown", function(event){
-    // console.log(event.code);
     const player = document.querySelector('.player');
 
     if(Object.keys(directions).includes(event.code)) {
@@ -79,22 +78,5 @@ function renderBoard(boardMap) {
         board2.appendChild(rowElement);
     }
 }
-
-/** Níveis clássicos podem ser encontrados nesta página:
- * https://web.archive.org/web/20120918183734/http://users.bentonrea.com/~sasquatch/sokoban/
- * https://web.archive.org/web/20120627234905/http://users.bentonrea.com/%7Esasquatch/sokoban/m1
- */
-
-const lvl_0 = `
-########
-#......#
-#...#..#
-#.#G...#
-#..GB#.#
-#..#.B.#
-#..P...#
-########
-`
-const boardMap = splitIntoLinesAndChars(lvl_0);
 
 document.body.onload = renderBoard(boardMap);

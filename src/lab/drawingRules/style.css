@@ -1,0 +1,86 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: inherit;
+}
+
+#game{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+}
+
+.board{
+    display: block;
+    min-height: min(3vh, 2vw);
+    min-width: min(3vh, 2vw);
+    margin: 24px;
+    padding: 2px 3px;
+    position: relative;
+    
+    border: solid 8px #484848;
+    border-radius: 8px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.40);
+
+    background-color: dimgray;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin: 2px 0;
+}
+
+.cell {
+    height: min(7vh, 5vw);
+    width: min(7vh, 5vw);
+    margin: 0 1px;
+    box-sizing: border-box;
+    
+    border-radius: 2px;
+    
+    background-color:ghostwhite;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
+}
+
+.empty { 
+    background-color: unset;
+    box-shadow: none;
+}
+
+.flag {
+    background-color: rgba(240,60,30, 0.4);
+}
+
+.box { background-color: chocolate; }
+.goal { background-color: burlywood; }
+.wall { background-color: darkgray; }
+
+.player {
+    position: absolute;
+    z-index: 10;
+    top: 4px;
+    left: 4px;
+    box-sizing: border-box;
+    
+    background-color: forestgreen;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    border: solid 8px rgba(0, 0, 0, 0.40);
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
+
+    transition:
+        left 150ms ease-in-out 50ms,
+        top 150ms ease-in-out 50ms;
+}
