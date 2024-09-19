@@ -1,10 +1,13 @@
-let x = 3;
-let y = 4;
+function Player(posX, posY){
+    this.x = posX;
+    this.y = posY;
+}
 
-const player = document.querySelector('.player');
-console.log(player);
+const player = new Player(3, 4);
 
-player.addEventListener("click", function(){
+const playerElement = document.querySelector('.player');
+
+playerElement.addEventListener("click", function(){
     window.alert("Clicou no jogador");
 })
 
@@ -13,10 +16,10 @@ window.addEventListener("keydown", function(event) {
 })
 
 function nextPosition(keycode) {  
-    if(keycode == "ArrowUp") x--;
-    if(keycode == "ArrowDown") x++;
-    if(keycode == "ArrowLeft") y--;
-    if(keycode == "ArrowRight") y++;
+    if(keycode == "ArrowUp") player.x--;
+    if(keycode == "ArrowDown") player.x++;
+    if(keycode == "ArrowLeft") player.y--;
+    if(keycode == "ArrowRight") player.y++;
 
-    console.log(keycode, x, y);
+    console.log(keycode, player);
 }
