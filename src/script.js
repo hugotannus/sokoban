@@ -1,10 +1,11 @@
 window.addEventListener("keydown", function(event) {
     const next = nextPosition(event.code);
+    const validPosition = verifyPosition(next);
 
-    if(verifyPosition(next)) movePlayer(next);
-})
+    if(validPosition) movePlayer(next);
+});
 
-function Player(posX, posY){
+function Player(posX, posY) {
     this.x = posX;
     this.y = posY;
 }
@@ -25,10 +26,8 @@ function nextPosition(keycode) {
 }
 
 function movePlayer(position){
-    let {x, y} = position;
-
-    player.x = x;
-    player.y = y;
+    player.x = position.x;
+    player.y = position.y;
 
     const K = player.x * 4 + player.y;
     
