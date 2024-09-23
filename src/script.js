@@ -1,25 +1,41 @@
-function Player(posX, posY){
-    this.x = posX;
-    this.y = posY;
-}
-
-const player = new Player(3, 4);
-
+const player = new Player(0, 0);
+const celulas = document.querySelectorAll('.cell');
 const playerElement = document.querySelector('.player');
 
-playerElement.addEventListener("click", function(){
-    window.alert("Clicou no jogador");
-})
-
 window.addEventListener("keydown", function(event) {
-    nextPosition(event.code);
-})
+    const next = player.nextPosition(event.code);
 
-function nextPosition(keycode) {  
-    if(keycode == "ArrowUp") player.x--;
-    if(keycode == "ArrowDown") player.x++;
-    if(keycode == "ArrowLeft") player.y--;
-    if(keycode == "ArrowRight") player.y++;
+    if(verifyPosition(next)) {
+        let K = next.x * 4 + next.y;
+        player.moveTo(next, playerElement, celulas[K]);
+    }
+});
 
-    console.log(keycode, player);
+function Player(posX, posY) {
+    this.x = posX;
+    this.y = posY;
+
+    this.nextPosition = function(keycode) {
+        let { x, y } = this;
+        
+        if(keycode == "ArrowUp") x--;
+        if(keycode == "ArrowDown") x++;
+        if(keycode == "ArrowLeft") y--;
+        if(keycode == "ArrowRight") y++;
+
+        return {x, y};
+    }
+
+    this.moveTo = function(position, element, parent) {
+        this.x = position.x;
+        this.y = position.y;
+        
+        parent.append(element);
+    }
+}
+
+function verifyPosition(position){
+    let {x, y} = position;
+
+    return x >= 0 && x < 4 && y >= 0 && y < 4;
 }
