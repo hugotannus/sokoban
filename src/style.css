@@ -71,6 +71,9 @@ main {
 
 .player {
     box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
     
     height: 64px;
     width: 64px;
@@ -80,4 +83,8 @@ main {
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
     /* background-color: forestgreen; */
     background: linear-gradient(90deg, hsla(97, 56%, 42%, 1) 0%, hsla(92, 55%, 62%, 1) 100%);
+
+    transition:
+        left 150ms ease-in-out 50ms,
+        top 150ms ease-in-out 50ms;
 }
