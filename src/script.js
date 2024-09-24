@@ -1,10 +1,12 @@
-buildGameBoard(8, 8, regra0);
+const DIST_SALTO = 66;
+const MARGIN_FIX = 4;
+const NUM_ROWS = 8;
+const NUM_COLS = 6;
+
+buildGameBoard(NUM_ROWS, NUM_COLS);
 
 const player = new Player(0, 0);
 const playerElement = document.querySelector('.player');
-
-const DIST_SALTO = 66;
-const MARGIN_FIX =  4;
 
 playerElement.style.top = calculaPosicao(0);
 playerElement.style.left = calculaPosicao(0);
@@ -45,36 +47,32 @@ function Player(posX, posY) {
 function verifyPosition(position) {
     let { x, y } = position;
 
-    return x >= 0 && x < 4 && y >= 0 && y < 4;
+    return x >= 0 && x < NUM_ROWS && y >= 0 && y < NUM_COLS;
 }
 
 function calculaPosicao(qtd) {
     return `${qtd * DIST_SALTO + MARGIN_FIX}px`;
 }
 
-function buildGameBoard(numRows, numCols, _regra) {
-    const game = document.getElementById("game");
-    const board = document.createElement('div');
-    board.classList.add('board');
-    
-    for (let k = 0; k < numRows; k++) {
-        const row = document.createElement('div');
-        row.classList.add('row');
-        board.append(row);
-        
-        for (let i = 0; i < numCols; i++) {
-            const celula = document.createElement('div');
-            celula.classList.add('cell');
-            row.append(celula);
+function createGameElement(elementName, className, parentNode) {
+    const element = document.createElement(elementName);
+    element.classList.add(className);
+    parentNode.append(element);
 
-            const devePreencher = regra(numRows, numCols, k, i);
-            
-            if(devePreencher) celula.classList.add('flag');
-        }
-    }
-    game.append(board);
+    return element;
 }
 
-function regra0() {
-    return false;
+function buildGameBoard(numRows, numCols) {
+    const game = document.getElementById("game");
+    const board = createGameElement('div', 'board', game);
+
+    for (let k = 0; k < numRows; k++) {
+        const row = createGameElement('div', 'row', board);
+
+        for (let i = 0; i < numCols; i++) {
+            createGameElement('div', 'cell', row);
+        }
+    }
+
+    createGameElement('div', 'player', board);
 }
