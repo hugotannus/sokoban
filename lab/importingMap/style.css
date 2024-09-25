@@ -1,0 +1,74 @@
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+}
+
+#game{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+}
+
+.board{
+    display: block;
+    min-height: min(8.75vh, 6.25vw);
+    min-width: min(8.75vh, 6.25vw);
+    padding: 2px 3px;
+    position: relative;
+
+    border: solid 8px #484848;
+    border-radius: 8px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.40);
+
+    background-color: dimgray;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin: 2px 0;
+}
+
+.cell {
+    height: 64px;
+    width: 64px;
+    margin: 0 1px;
+    box-sizing: border-box;
+
+    border-radius: 2px;
+
+    background-color:ghostwhite;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
+}
+
+.empty { 
+    background-color: unset;
+    box-shadow: none;
+}
+
+.box { background-color: chocolate; }
+.goal { background-color: burlywood; }
+.wall { background-color: darkgray; }
+
+.player {
+    position: absolute;
+    z-index: 10;
+    top: 4px;
+    left: 4px;
+    box-sizing: border-box;
+
+    background-color: forestgreen;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    border: solid 8px rgba(0, 0, 0, 0.40);
+}
