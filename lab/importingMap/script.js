@@ -26,11 +26,14 @@ function buildGameBoard(numRows, numCols) {
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
 
-    for (let k = 0; k < numRows; k++) {
+    for (let i = 0; i < numRows; i++) {
         const row = createGameElement('div', 'row', board);
 
-        for (let i = 0; i < numCols; i++) {
-            createGameElement('div', 'cell', row);
+        for (let j = 0; j < numCols; j++) {
+            const cell = createGameElement('div', 'cell', row);
+            const char = boardMap[i][j];
+            
+            if(char === '#')cell.classList.add('wall');
         }
     }
 }
