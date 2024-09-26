@@ -15,10 +15,11 @@ const NUM_COLS = boardMap[0].length;
 const DIST_SALTO = 66;
 const MARGIN_FIX = 4;
 
-const positionOfPieces = buildGameBoard(NUM_ROWS, NUM_COLS);
+const pieces = buildGameBoard(NUM_ROWS, NUM_COLS);
+const board = document.querySelector('.board');
 
-const player = new Player(positionOfPieces.player.x, positionOfPieces.player.y);
-const playerElement = document.querySelector('.player');
+const playerElement = createGameElement('div', ['piece', 'player'], board);
+const player = new Player(pieces.player.x, pieces.player.y);
 
 playerElement.style.top = calculaPosicao(player.x);
 playerElement.style.left = calculaPosicao(player.y);
@@ -75,9 +76,10 @@ function createGameElement(elementName, classList, parentNode) {
 }
 
 function buildGameBoard(numRows, numCols) {
+    const positionOfPieces = {};
+
     const game = document.getElementById("game");
     const board = createGameElement('div', ['board'], game);
-    const positionOfPieces = {}
 
     for (let i = 0; i < numRows; i++) {
         const row = createGameElement('div',['row'], board);
@@ -89,16 +91,10 @@ function buildGameBoard(numRows, numCols) {
             
             if(char === '#')cell.classList.add(['wall']);
             if(char === 'G')cell.classList.add(['goal']);
-            if(char === 'B'){
-                const box = createGameElement('div', ['piece', 'box'], board);
-                box.style.top = calculaPosicao(i);
-                box.style.left = calculaPosicao(j);
-            };
-            if(char === 'P') positionOfPieces.player = {x: i, y: j};
+            if(char === 'B')cell.classList.add(['block']);
+            if(char === 'P') positionOfPieces.player = { x: i, y: j };
         }
     }
-
-    createGameElement('div', ['piece', 'player'], board);
 
     return positionOfPieces;
 }
