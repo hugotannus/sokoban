@@ -10,7 +10,7 @@ main {
     min-height: inherit;
 }
 
-#game{
+#game {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -19,14 +19,14 @@ main {
     align-items: center;
 }
 
-.board{
+.board {
     display: block;
     min-height: 256px;
     min-width: 256px;
     margin: 24px;
     padding: 2px 3px;
     position: relative;
-    
+
     /* border: solid 8px #484848; */
     border: solid 8px rgb(57, 27, 16);
     border-radius: 8px;
@@ -49,42 +49,55 @@ main {
     width: 64px;
     margin: 0 1px;
     box-sizing: border-box;
-    
+
     border-radius: 2px;
-    
-    background-color:ghostwhite;
+
+    background-color: ghostwhite;
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
 }
 
-.empty { 
+.empty {
     background-color: unset;
     box-shadow: none;
 }
 
 .flag {
-    background-color: rgba(240,60,30, 0.4);
+    background-color: rgba(240, 60, 30, 0.4);
 }
 
-.box { background-color: chocolate; }
-.goal { background-color: burlywood; }
-.wall { background-color: darkgray; }
+.goal {
+    background-color: burlywood;
+}
 
-.player {
+.wall {
+    background-color: darkgray;
+}
+
+.piece {
     box-sizing: border-box;
     position: absolute;
-    top: 0;
-    left: 0;
-    
+
     height: 64px;
     width: 64px;
-    border-radius: 50%;
     /* border: solid 8px rgba(0, 0, 0, 0.40); */
     border: solid 8px rgb(39, 54, 39);
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.56);
     /* background-color: forestgreen; */
-    background: linear-gradient(90deg, hsla(97, 56%, 42%, 1) 0%, hsla(92, 55%, 62%, 1) 100%);
-
+    
     transition:
-        left 150ms ease-in-out 50ms,
-        top 150ms ease-in-out 50ms;
+    left 150ms ease-in-out 50ms,
+    top 150ms ease-in-out 50ms;
+}
+
+.player {
+    border-radius: 50%;
+    background: linear-gradient(90deg, hsla(97, 56%, 42%, 1) 0%, hsla(92, 55%, 62%, 1) 100%);
+}
+
+.box {
+    height: 60px;
+    width: 60px;
+    margin: 2px;
+    border-radius: 16px;
+    background-color: chocolate;
 }
