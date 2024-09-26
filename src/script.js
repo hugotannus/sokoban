@@ -15,9 +15,9 @@ const NUM_COLS = boardMap[0].length;
 const DIST_SALTO = 66;
 const MARGIN_FIX = 4;
 
-buildGameBoard(NUM_ROWS, NUM_COLS);
+const positionOfPieces = buildGameBoard(NUM_ROWS, NUM_COLS);
 
-const player = new Player(1, 1);
+const player = new Player(positionOfPieces.player.x, positionOfPieces.player.y);
 const playerElement = document.querySelector('.player');
 
 playerElement.style.top = calculaPosicao(player.x);
@@ -77,6 +77,7 @@ function createGameElement(elementName, classList, parentNode) {
 function buildGameBoard(numRows, numCols) {
     const game = document.getElementById("game");
     const board = createGameElement('div', ['board'], game);
+    const positionOfPieces = {}
 
     for (let i = 0; i < numRows; i++) {
         const row = createGameElement('div',['row'], board);
@@ -93,8 +94,11 @@ function buildGameBoard(numRows, numCols) {
                 box.style.top = calculaPosicao(i);
                 box.style.left = calculaPosicao(j);
             };
+            if(char === 'P') positionOfPieces.player = {x: i, y: j};
         }
     }
 
     createGameElement('div', ['piece', 'player'], board);
+
+    return positionOfPieces;
 }
