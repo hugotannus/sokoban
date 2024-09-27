@@ -19,15 +19,15 @@ function Piece(posX, posY) {
     this.moveTo = function (position) {
         this.x = position.x;
         this.y = position.y;
-        this.updatePiecePosition();
+        this.updateElementPosition();
     }
 
     this.insertElementInto = function (parentElement, className) {
         this.element = createGameElement(className, parentElement);
-        this.updatePiecePosition();
+        this.updateElementPosition();
     }
 
-    this.updatePiecePosition = function () {
+    this.updateElementPosition = function () {
         this.element.style.top = calculaPosicao(this.x);
         this.element.style.left = calculaPosicao(this.y);
     }
