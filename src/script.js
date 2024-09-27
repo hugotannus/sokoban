@@ -19,17 +19,15 @@ const pieces = buildGameBoard(NUM_ROWS, NUM_COLS);
 
 const player = new Piece(pieces.player.x, pieces.player.y);
 const board = document.querySelector('.board');
-const playerElement = createGameElement('div', ['piece', 'player'], board);
 
-playerElement.style.top = calculaPosicao(player.x);
-playerElement.style.left = calculaPosicao(player.y);
+player.insertElementInto(board);
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
     const next = player.nextPosition(event.code);
 
     if (verifyPosition(next)) {
-        player.moveTo(next, playerElement);
+        player.moveTo(next);
     }
 });
 
@@ -48,12 +46,20 @@ function Piece(posX, posY) {
         return { x, y };
     }
 
-    this.moveTo = function (position, element) {
+    this.moveTo = function (position) {
         this.x = position.x;
         this.y = position.y;
+        this.updatePiecePosition();
+    }
 
-        element.style.top = calculaPosicao(this.x);
-        element.style.left = calculaPosicao(this.y);
+    this.insertElementInto = function(board){
+        this.element = createGameElement('div', ['piece', 'player'], board);
+        this.updatePiecePosition();
+    }
+    
+    this.updatePiecePosition = function() {
+        this.element.style.top = calculaPosicao(this.x);
+        this.element.style.left = calculaPosicao(this.y);
     }
 }
 
