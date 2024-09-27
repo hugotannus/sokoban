@@ -1,3 +1,5 @@
+const DIST_SALTO = 66;
+const MARGIN_FIX = 4;
 
 function Piece(posX, posY) {
     this.x = posX;
@@ -22,10 +24,16 @@ function Piece(posX, posY) {
         this.element.style.left = calculaPosicao(this.y);
     }
 
-    this.insertElementInto = function(className, parent) {
+    this.insertElementInto = function (className, parent) {
         this.element = createGameElement('div', className, parent);
 
         this.element.style.top = calculaPosicao(this.x);
         this.element.style.left = calculaPosicao(this.y);
+    }
+
+    /* Funções privadas */
+
+    function calculaPosicao(qtd) {
+        return `${qtd * DIST_SALTO + MARGIN_FIX}px`;
     }
 }
