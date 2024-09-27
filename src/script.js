@@ -8,12 +8,9 @@ const player = new Piece(pieces.player.x, pieces.player.y);
 const playerElement = createBoardPiece(player, 'player');
 
 function createBoardPiece(piece, className) {
-    const element = createGameElement('div', className, board);
-
-    element.style.top = calculaPosicao(piece.x);
-    element.style.left = calculaPosicao(piece.y);
-
-    return element;
+    piece.insertElementInto(className, board);
+    
+    return piece.element;
 }
 
 window.addEventListener("keydown", function (event) {
