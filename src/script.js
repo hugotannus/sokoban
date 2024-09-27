@@ -17,7 +17,7 @@ const MARGIN_FIX = 4;
 
 const pieces = buildGameBoard(NUM_ROWS, NUM_COLS);
 
-const player = new Player(pieces.player.x, pieces.player.y);
+const player = new Piece(pieces.player.x, pieces.player.y);
 const board = document.querySelector('.board');
 const playerElement = createGameElement('div', ['piece', 'player'], board);
 
@@ -33,7 +33,7 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
-function Player(posX, posY) {
+function Piece(posX, posY) {
     this.x = posX;
     this.y = posY;
 
