@@ -4,11 +4,17 @@ const MARGIN_FIX = 4;
 const pieces = buildGameBoard(NUM_ROWS, NUM_COLS);
 const board = document.querySelector('.board');
 
-const playerElement = createGameElement('div', 'player', board);
 const player = new Piece(pieces.player.x, pieces.player.y);
+const playerElement = createBoardPiece(player, 'player');
 
-playerElement.style.top = calculaPosicao(player.x);
-playerElement.style.left = calculaPosicao(player.y);
+function createBoardPiece(piece, className) {
+    const element = createGameElement('div', className, board);
+
+    element.style.top = calculaPosicao(piece.x);
+    element.style.left = calculaPosicao(piece.y);
+
+    return element;
+}
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
