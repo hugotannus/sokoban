@@ -14,12 +14,12 @@ function Piece(posX, posY) {
         return { x, y };
     }
 
-    this.moveTo = function (position, element) {
+    this.moveTo = function (position) {
         this.x = position.x;
         this.y = position.y;
 
-        element.style.top = calculaPosicao(this.x);
-        element.style.left = calculaPosicao(this.y);
+        this.element.style.top = calculaPosicao(this.x);
+        this.element.style.left = calculaPosicao(this.y);
     }
 
     this.insertElementInto = function(className, parent) {
