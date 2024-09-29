@@ -1,4 +1,4 @@
-const { pieces } = buildGameBoard(boardMap);
+const { pieces, goals } = buildGameBoard(boardMap);
 const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');
@@ -26,6 +26,8 @@ function handlePieceMovement(keycode) {
         if (verifyPosition(nextBoxPosition)) {
             foundBox.moveTo(nextBoxPosition);
             player.moveTo(nextPosition);
+
+            setTimeout(verifyVictory, 500);
         }
     } else if (verifyPosition(nextPosition)) {
         player.moveTo(nextPosition);
@@ -36,4 +38,28 @@ function verifyPosition(position) {
     let { x, y } = position;
 
     return boardMap[x][y] !== '#';
+}
+
+function verifyVictory() {
+    const boxesOnGoal = countBoxesOnGoal();
+
+    if (boxesOnGoal === goals.length) {
+        alert("Você concluiu o desafio!");
+    }
+
+    console.log(boxesOnGoal)
+}
+
+function countBoxesOnGoal() {
+    let counter = 0;
+
+    for(let box of boxes){
+        const foundGoal = goals.find(function(goal) {
+            return goal.x == box.x && goal.y == box.y
+        });
+        
+        if(foundGoal) counter++;
+    }
+
+    return counter;
 }
