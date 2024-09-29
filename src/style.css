@@ -5,6 +5,7 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: inherit;
@@ -12,18 +13,29 @@ main {
 
 #game {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    width: 100%;
     align-items: center;
+
+    width: fit-content;
+    margin: 24px;
+}
+
+.game-stats {
+    align-self: flex-start;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+.label {
+    font-weight: bold;
 }
 
 .board {
     display: block;
     min-height: 256px;
     min-width: 256px;
-    margin: 24px;
     padding: 2px 3px;
     position: relative;
 
