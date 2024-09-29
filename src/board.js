@@ -32,14 +32,15 @@ function buildGameBoard(boardMap) {
             const cell = createGameElement('cell', row);
 
             const char = boardMap[i][j];
+            const position = { x: j, y: i };
 
             if (char === '#') cell.classList.add('wall');
             if (char === ' ') cell.classList.add('empty');
-            if (char === 'P') player = { x: i, y: j };
-            if (char === 'B') boxes.push({ x: i, y: j });
+            if (char === 'P') player = position;
+            if (char === 'B') boxes.push(position);
             if (char === 'G') {
                 cell.classList.add('goal');
-                goals.push({x: i, y: j})
+                goals.push(position)
             }
         }
     }
