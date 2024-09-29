@@ -61,7 +61,7 @@ function handlePieceMovement(keycode) {
             updateMovesCounter();
             updateBoxesOnGoalStats();
 
-            setTimeout(verifyVictory, 500);
+            if(verifyVictory()) setTimeout(showGreetings, 500);
         }
     } else {
         const hasNoWall = verifyPosition(nextPosition);
@@ -80,23 +80,15 @@ function verifyPosition(position) {
 }
 
 function countBoxesOnGoal() {
-    let counter = 0;
+    return boxes.reduce((counter, box) => {
+        return ( findTargetAt(goals, box) && ++counter ) || counter;
+    }, 0);
+}
 
-    for (let box of boxes) {
-        const foundGoal = findTargetAt(goals, box);
-
-        if (foundGoal) counter++;
-    }
-
-    return counter;
+function showGreetings() {
+    alert("Você concluiu o desafio!");
 }
 
 function verifyVictory() {
-    const boxesOnGoal = countBoxesOnGoal();
-
-    if (boxesOnGoal === goals.length) {
-        alert("Você concluiu o desafio!");
-    }
-
-    console.log(boxesOnGoal)
+    return boxesOnGoal === goals.length;
 }
