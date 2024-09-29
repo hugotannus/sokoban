@@ -7,13 +7,17 @@ let moves = 0;
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
-    
-    const VALID_KEYS = [ "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", ];
 
-    if(VALID_KEYS.includes(event.code)) {
+    const VALID_KEY_CODES = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+    if (VALID_KEY_CODES.includes(event.code)) {
         handlePieceMovement(event.code);
     }
 });
+
+function findTargetAt(list, position) {
+    return list.find(target => target.x === position.x && target.y === position.y);
+}
 
 function updateMovesCounter() {
     const movesElement = document.getElementById('moves');
@@ -23,28 +27,35 @@ function updateMovesCounter() {
 function createBoardPiece(position, className = 'box') {
     const piece = new Piece(position.x, position.y);
     piece.insertElementInto(board, className);
-    
+
     return piece
 }
 
 function handlePieceMovement(keycode) {
     const nextPosition = player.nextPosition(keycode);
-    const foundBox = boxes.find(box => box.x == nextPosition.x && box.y == nextPosition.y);
-    
+    const foundBox = findTargetAt(boxes, nextPosition);
+
     if (foundBox) {
         const nextBoxPosition = foundBox.nextPosition(keycode);
-        
-        if (verifyPosition(nextBoxPosition)) {
+
+        const hasNoWall = verifyPosition(nextBoxPosition);
+        const hasAnotherBlock = findTargetAt(boxes, nextBoxPosition);
+
+        if (hasNoWall && !hasAnotherBlock) {
             foundBox.moveTo(nextBoxPosition);
             player.moveTo(nextPosition);
 
             updateMovesCounter();
-            
+
             setTimeout(verifyVictory, 500);
         }
-    } else if (verifyPosition(nextPosition)) {
-        player.moveTo(nextPosition);
-        updateMovesCounter();
+    } else {
+        const hasNoWall = verifyPosition(nextPosition);
+
+        if (hasNoWall) {
+            player.moveTo(nextPosition);
+            updateMovesCounter();
+        }
     }
 }
 
@@ -52,6 +63,18 @@ function verifyPosition(position) {
     let { x: j, y: i } = position;
 
     return boardMap[i][j] !== '#';
+}
+
+function countBoxesOnGoal() {
+    let counter = 0;
+
+    for (let box of boxes) {
+        const foundGoal = findTargetAt(goals, box);
+
+        if (foundGoal) counter++;
+    }
+
+    return counter;
 }
 
 function verifyVictory() {
@@ -62,18 +85,4 @@ function verifyVictory() {
     }
 
     console.log(boxesOnGoal)
-}
-
-function countBoxesOnGoal() {
-    let counter = 0;
-
-    for(let box of boxes){
-        const foundGoal = goals.find(function(goal) {
-            return goal.x == box.x && goal.y == box.y
-        });
-        
-        if(foundGoal) counter++;
-    }
-
-    return counter;
 }
