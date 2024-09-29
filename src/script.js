@@ -1,11 +1,10 @@
-const { pieces, goals } = buildGameBoard(boardMap);
+const { pieces, numberOfGoals } = buildGameBoard(boardMap);
 const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');
 const boxes = pieces.boxes.map(box => createBoardPiece(box));
 
-const boxesOnGoalStats = document.getElementById('goals');
-document.getElementById("targets").innerText = goals.length;
+document.getElementById("targets").innerText = numberOfGoals;
 
 let moves = 0;
 let boxesOnGoal = 0;
@@ -20,32 +19,32 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
-function findTargetAt(list, position) {
-    return list.find(target => target.x === position.x && target.y === position.y);
+function findTargetAt(pieces, position) {
+    return pieces.find(target => target.x === position.x && target.y === position.y);
 }
 
-function verifyCollisions(position, list = null) {
+function verifyCollisions(position, pieces = null) {
     let { x: j, y: i } = position;
 
     const hasWallCollision = boardMap[i][j] === '#';
-    const hasAnotherPiece = list && findTargetAt(list, position);
+    const hasAnotherPiece = pieces && findTargetAt(pieces, position);
 
     return hasWallCollision || hasAnotherPiece;
 }
 
 function updateMovesCounter() {
-    const movesElement = document.getElementById('moves');
-    movesElement.innerText = ++moves;
+    document.getElementById('moves').innerText = ++moves;
 }
 
 function updateBoxesOnGoalStats() {
-    const boxesOnGoalStats = document.getElementById('goals');
+    boxesOnGoal = 0;
 
-    boxesOnGoal = boxes.reduce((counter, box) => {
-        return (findTargetAt(goals, box) && ++counter) || counter;
-    }, 0);
+    for (let position of boxes) {
+        let { x: j, y: i } = position;
+        if (boardMap[i][j] === 'G') boxesOnGoal++;
+    }
 
-    boxesOnGoalStats.innerText = boxesOnGoal;
+    document.getElementById('goals').innerText = boxesOnGoal;
 }
 
 function handlePieceMovement(keycode) {
@@ -63,7 +62,7 @@ function handlePieceMovement(keycode) {
             updateMovesCounter();
             updateBoxesOnGoalStats();
 
-            if (goals.length === boxesOnGoal) {
+            if (numberOfGoals === boxesOnGoal) {
                 setTimeout(() => alert("Você concluiu o desafio!"), 500);
             }
         }

@@ -29,7 +29,7 @@ function buildGameBoard(boardMap) {
     const board = createGameElement('board', game);
     const numRows = boardMap.length;
     
-    let boxes = [], goals = [], player = null;
+    let player = null, boxes = [], numberOfGoals = 0;
     
     for (let i = 0; i < numRows; i++) {
         const row = createGameElement('row', board);
@@ -48,10 +48,10 @@ function buildGameBoard(boardMap) {
             if (char === 'B') boxes.push(position);
             if (char === 'G') {
                 classList.add('goal');
-                goals.push(position)
+                numberOfGoals++;
             }
         }
     }
 
-    return { goals, boardMap, pieces: { player, boxes } }
+    return { numberOfGoals, pieces: { player, boxes } }
 }
