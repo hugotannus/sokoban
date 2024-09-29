@@ -29,17 +29,18 @@ function buildGameBoard(boardMap) {
         const numCols = boardMap[i].length;
         
         for (let j = 0; j < numCols; j++) {
-            const cell = createGameElement('cell', row);
+            // Simplifica acesso à propriedade `classList` a adicionar nova célula ao tabuleiro.
+            const { classList } = createGameElement('cell', row);
 
             const char = boardMap[i][j];
             const position = { x: j, y: i };
 
-            if (char === '#') cell.classList.add('wall');
-            if (char === ' ') cell.classList.add('empty');
+            if (char === '#') classList.add('wall');
+            if (char === ' ') classList.add('empty');
             if (char === 'P') player = position;
             if (char === 'B') boxes.push(position);
             if (char === 'G') {
-                cell.classList.add('goal');
+                classList.add('goal');
                 goals.push(position)
             }
         }
