@@ -1,12 +1,12 @@
 const boardMap = [
-    ["#", "#", "#", "#", "#", "#", "#", "#"],
-    ["#", ".", ".", ".", ".", ".", ".", "#"],
-    ["#", ".", ".", ".", "#", ".", ".", "#"],
+    [" ", " ", "#", "#", "#", "#", "#"],
+    ["#", "#", "#", ".", ".", ".", "#"],
+    ["#", ".", ".", ".", "#", ".", "#", "#"],
     ["#", ".", "#", "G", ".", ".", ".", "#"],
     ["#", ".", ".", "G", "B", "#", ".", "#"],
-    ["#", ".", ".", "#", ".", "B", ".", "#"],
-    ["#", ".", ".", "P", ".", ".", ".", "#"],
-    ["#", "#", "#", "#", "#", "#", "#", "#"]
+    ["#", "#", ".", "#", ".", "B", ".", "#"],
+    [" ", "#", ".", "P", ".", "#", "#", "#"],
+    [" ", "#", "#", "#", "#", "#"]
 ];
 
 function createGameElement(classList, parentNode, elementName = 'div') {
@@ -41,6 +41,7 @@ function buildGameBoard(boardMap) {
 
             if (char === '#') cell.classList.add('wall');
             if (char === 'G') cell.classList.add('goal');
+            if (char === ' ') cell.classList.add('empty');
             if (char === 'P') gameBoard.pieces.player = { x: i, y: j };
             if (char === 'B') gameBoard.pieces.boxes.push({ x: i, y: j });
         }
