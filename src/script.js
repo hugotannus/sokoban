@@ -3,7 +3,12 @@ const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');
 const boxes = pieces.boxes.map(box => createBoardPiece(box));
+
+const boxesOnGoalStats = document.getElementById('goals');
+document.getElementById("targets").innerText = goals.length;
+
 let moves = 0;
+let boxesOnGoal = 0;
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
@@ -22,6 +27,14 @@ function findTargetAt(list, position) {
 function updateMovesCounter() {
     const movesElement = document.getElementById('moves');
     movesElement.innerText = ++moves;
+}
+
+function updateBoxesOnGoalStats() {
+    const boxesOnGoalStats = document.getElementById('goals');
+    
+    boxesOnGoal =  countBoxesOnGoal();
+
+    boxesOnGoalStats.innerText = boxesOnGoal;
 }
 
 function createBoardPiece(position, className = 'box') {
@@ -46,6 +59,7 @@ function handlePieceMovement(keycode) {
             player.moveTo(nextPosition);
 
             updateMovesCounter();
+            updateBoxesOnGoalStats();
 
             setTimeout(verifyVictory, 500);
         }
