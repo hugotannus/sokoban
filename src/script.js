@@ -24,6 +24,15 @@ function findTargetAt(list, position) {
     return list.find(target => target.x === position.x && target.y === position.y);
 }
 
+function verifyCollisions(position, list = null) {
+    let { x: j, y: i } = position;
+
+    const hasWallCollision = boardMap[i][j] === '#';
+    const hasAnotherPiece = list && findTargetAt(list, position);
+
+    return hasWallCollision || hasAnotherPiece;
+}
+
 function updateMovesCounter() {
     const movesElement = document.getElementById('moves');
     movesElement.innerText = ++moves;
@@ -31,8 +40,10 @@ function updateMovesCounter() {
 
 function updateBoxesOnGoalStats() {
     const boxesOnGoalStats = document.getElementById('goals');
-    
-    boxesOnGoal =  countBoxesOnGoal();
+
+    boxesOnGoal = boxes.reduce((counter, box) => {
+        return (findTargetAt(goals, box) && ++counter) || counter;
+    }, 0);
 
     boxesOnGoalStats.innerText = boxesOnGoal;
 }
@@ -52,7 +63,9 @@ function handlePieceMovement(keycode) {
             updateMovesCounter();
             updateBoxesOnGoalStats();
 
-            if(verifyVictory()) setTimeout(showGreetings, 500);
+            if (goals.length === boxesOnGoal) {
+                setTimeout(() => alert("Você concluiu o desafio!"), 500);
+            }
         }
     } else {
         const playerCollision = verifyCollisions(nextPlayerPosition);
@@ -62,27 +75,4 @@ function handlePieceMovement(keycode) {
             updateMovesCounter();
         }
     }
-}
-
-function verifyCollisions(position, list=null) {
-    let { x: j, y: i } = position;
-
-    const hasWallCollision = boardMap[i][j] === '#';
-    const hasAnotherPiece = list && findTargetAt(list, position);
-
-    return hasWallCollision || hasAnotherPiece;
-}
-
-function countBoxesOnGoal() {
-    return boxes.reduce((counter, box) => {
-        return ( findTargetAt(goals, box) && ++counter ) || counter;
-    }, 0);
-}
-
-function showGreetings() {
-    alert("Você concluiu o desafio!");
-}
-
-function verifyVictory() {
-    return boxesOnGoal === goals.length;
 }
