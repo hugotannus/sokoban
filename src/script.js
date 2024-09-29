@@ -38,18 +38,16 @@ function updateBoxesOnGoalStats() {
 }
 
 function handlePieceMovement(keycode) {
-    const nextPosition = player.nextPosition(keycode);
-    const foundBox = findTargetAt(boxes, nextPosition);
+    const nextPlayerPosition = player.nextPosition(keycode);
+    const foundBox = findTargetAt(boxes, nextPlayerPosition);
 
     if (foundBox) {
         const nextBoxPosition = foundBox.nextPosition(keycode);
+        const boxCollision = verifyCollisions(nextBoxPosition, boxes);
 
-        const hasNoWall = verifyPosition(nextBoxPosition);
-        const hasAnotherBlock = findTargetAt(boxes, nextBoxPosition);
-
-        if (hasNoWall && !hasAnotherBlock) {
+        if (!boxCollision) {
             foundBox.moveTo(nextBoxPosition);
-            player.moveTo(nextPosition);
+            player.moveTo(nextPlayerPosition);
 
             updateMovesCounter();
             updateBoxesOnGoalStats();
@@ -57,19 +55,22 @@ function handlePieceMovement(keycode) {
             if(verifyVictory()) setTimeout(showGreetings, 500);
         }
     } else {
-        const hasNoWall = verifyPosition(nextPosition);
+        const playerCollision = verifyCollisions(nextPlayerPosition);
 
-        if (hasNoWall) {
-            player.moveTo(nextPosition);
+        if (!playerCollision) {
+            player.moveTo(nextPlayerPosition);
             updateMovesCounter();
         }
     }
 }
 
-function verifyPosition(position) {
+function verifyCollisions(position, list=null) {
     let { x: j, y: i } = position;
 
-    return boardMap[i][j] !== '#';
+    const hasWallCollision = boardMap[i][j] === '#';
+    const hasAnotherPiece = list && findTargetAt(list, position);
+
+    return hasWallCollision || hasAnotherPiece;
 }
 
 function countBoxesOnGoal() {
