@@ -37,13 +37,6 @@ function updateBoxesOnGoalStats() {
     boxesOnGoalStats.innerText = boxesOnGoal;
 }
 
-function createBoardPiece(position, className = 'box') {
-    const piece = new Piece(position.x, position.y);
-    piece.insertElementInto(board, className);
-
-    return piece
-}
-
 function handlePieceMovement(keycode) {
     const nextPosition = player.nextPosition(keycode);
     const foundBox = findTargetAt(boxes, nextPosition);

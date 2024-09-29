@@ -9,6 +9,13 @@ const boardMap = [
     [" ", "#", "#", "#", "#", "#"]
 ];
 
+function createBoardPiece(position, className = 'box') {
+    const piece = new Piece(position.x, position.y);
+    piece.insertElementInto(board, className);
+
+    return piece
+}
+
 function createGameElement(classList, parentNode, elementName = 'div') {
     const element = document.createElement(elementName);
     element.classList.add(classList);
