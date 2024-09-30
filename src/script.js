@@ -2,7 +2,7 @@ import { buildGameBoard } from './board.js';
 
 const { boardMap, numberOfGoals, pieces: { player, boxes } } = buildGameBoard();
 
-let moves = 0;
+let boxesOnGoal = 0;
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
@@ -34,14 +34,12 @@ function countBoxesOnGoal() {
 }
 
 function updateMovesCounter() {
-    document.getElementById('moves').innerText = ++moves;
+    document.getElementById('moves').innerText = player.moves;
 }
 
 function updateBoxesOnGoalStats() {
-    let boxesOnGoal = countBoxesOnGoal();
+    boxesOnGoal = countBoxesOnGoal();
     document.getElementById('goals').innerText = boxesOnGoal;
-
-    return boxesOnGoal;
 }
 
 function handlePieceMovement(keycode) {
@@ -53,15 +51,14 @@ function handlePieceMovement(keycode) {
         const boxCollision = verifyCollisions(nextBoxPosition, boxes);
 
         if (!boxCollision) {
-            const boxesOnGoal = updateBoxesOnGoalStats();
-            
-            updateMovesCounter();
-            
             foundBox.moveTo(nextBoxPosition);
             player.moveTo(nextPlayerPosition);
-
+            
+            updateMovesCounter();
+            updateBoxesOnGoalStats();
+            
             if (numberOfGoals === boxesOnGoal) {
-                const message = `Parabéns!\n\nVocê concluiu o desfio em ${moves} passos!`
+                const message = `Parabéns!\n\nVocê concluiu o desfio em ${player.moves} passos!`
                 setTimeout(() => alert(message), 500);
             }
         }

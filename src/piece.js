@@ -5,6 +5,7 @@ function Piece(posX, posY, element=null) {
     this.x = posX;
     this.y = posY;
     this.element = element;
+    this.moves = 0;
 
     this.nextPosition = function (keycode) {
         let { x, y } = this;
@@ -20,7 +21,10 @@ function Piece(posX, posY, element=null) {
     this.moveTo = function (position) {
         this.x = position.x;
         this.y = position.y;
+        
         this.updateElementPosition();
+        
+        this.moves++;
     }
 
     this.updateElementPosition = function () {
