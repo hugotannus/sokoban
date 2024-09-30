@@ -1,11 +1,6 @@
-import { buildGameBoard, createBoardPiece } from './board.js';
+import { buildGameBoard } from './board.js';
 
-const { boardMap, pieces, numberOfGoals } = buildGameBoard();
-
-const player = createBoardPiece(pieces.player, 'player');
-const boxes = pieces.boxes.map(box => createBoardPiece(box));
-
-document.getElementById("targets").innerText = numberOfGoals;
+const { boardMap, numberOfGoals, pieces: { player, boxes } } = buildGameBoard();
 
 let moves = 0;
 let boxesOnGoal = 0;
@@ -20,15 +15,15 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
-function findTargetAt(pieces, position) {
-    return pieces.find(target => target.x === position.x && target.y === position.y);
+function findBoxAtPosition(pos) {
+    return boxes.find(box => box.x === pos.x && box.y === pos.y);
 }
 
 function verifyCollisions(position, pieces = null) {
     let { x: j, y: i } = position;
 
     const hasWallCollision = boardMap[i][j] === '#';
-    const hasAnotherPiece = pieces && findTargetAt(pieces, position);
+    const hasAnotherPiece = pieces && findBoxAtPosition(position);
 
     return hasWallCollision || hasAnotherPiece;
 }
@@ -50,7 +45,7 @@ function updateBoxesOnGoalStats() {
 
 function handlePieceMovement(keycode) {
     const nextPlayerPosition = player.nextPosition(keycode);
-    const foundBox = findTargetAt(boxes, nextPlayerPosition);
+    const foundBox = findBoxAtPosition(nextPlayerPosition);
 
     if (foundBox) {
         const nextBoxPosition = foundBox.nextPosition(keycode);

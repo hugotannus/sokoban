@@ -21,11 +21,10 @@ function createGameElement(classList, parentNode, elementName = 'div') {
 
 export function createBoardPiece(position, className = 'box') {
     const board = document.querySelector('.board');
-
-    const piece = new Piece(position.x, position.y);
     const pieceElement = createGameElement(className, board);
+    const piece = new Piece(position.x, position.y, pieceElement);
 
-    piece.setElement(pieceElement);
+    piece.updateElementPosition();
 
     return piece
 }
@@ -49,14 +48,16 @@ export function buildGameBoard() {
 
             if (char === '#') classList.add('wall');
             if (char === ' ') classList.add('empty');
-            if (char === 'P') player = position;
-            if (char === 'B') boxes.push(position);
+            if (char === 'P') player = createBoardPiece(position, 'player');
+            if (char === 'B') boxes.push(createBoardPiece(position, 'box'));
             if (char === 'G') {
                 classList.add('goal');
                 numberOfGoals++;
             }
         }
     }
+
+    document.getElementById("targets").innerText = numberOfGoals;
 
     return { boardMap, numberOfGoals, pieces: { player, boxes } }
 }

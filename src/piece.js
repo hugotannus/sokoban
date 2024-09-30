@@ -1,9 +1,10 @@
 const DIST_SALTO = 66;
 const MARGIN_FIX = 4;
 
-function Piece(posX, posY) {
+function Piece(posX, posY, element=null) {
     this.x = posX;
     this.y = posY;
+    this.element = element;
 
     this.nextPosition = function (keycode) {
         let { x, y } = this;
@@ -19,11 +20,6 @@ function Piece(posX, posY) {
     this.moveTo = function (position) {
         this.x = position.x;
         this.y = position.y;
-        this.updateElementPosition();
-    }
-
-    this.setElement = function (pieceElement) {
-        this.element = pieceElement;
         this.updateElementPosition();
     }
 
