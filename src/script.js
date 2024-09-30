@@ -1,4 +1,7 @@
-const pieces = buildGameBoard(NUM_ROWS, NUM_COLS);
+import Piece from "./piece.js";
+import { buildGameBoard, boardMap } from "./board.js";
+
+const pieces = buildGameBoard();
 const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');

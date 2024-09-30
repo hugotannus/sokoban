@@ -1,4 +1,4 @@
-const boardMap = [
+export const boardMap = [
     ["#", "#", "#", "#", "#", "#", "#", "#"],
     ["#", ".", ".", ".", ".", ".", ".", "#"],
     ["#", ".", ".", ".", "#", ".", ".", "#"],
@@ -12,16 +12,16 @@ const boardMap = [
 const NUM_ROWS = boardMap.length;
 const NUM_COLS = boardMap[0].length;
 
-function buildGameBoard(numRows, numCols) {
+export function buildGameBoard() {
     const pieces = {};
 
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
 
-    for (let i = 0; i < numRows; i++) {
+    for (let i = 0; i < NUM_ROWS; i++) {
         const row = createGameElement('div', 'row', board);
 
-        for (let j = 0; j < numCols; j++) {
+        for (let j = 0; j < NUM_COLS; j++) {
             const cell = createGameElement('div', 'cell', row);
 
             const char = boardMap[i][j];
@@ -36,7 +36,7 @@ function buildGameBoard(numRows, numCols) {
     return pieces;
 }
 
-function createGameElement(elementName, className, parentNode) {
+export function createGameElement(elementName, className, parentNode) {
     const element = document.createElement(elementName);
     element.classList.add(className);
     parentNode.append(element);
