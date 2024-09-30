@@ -46,7 +46,14 @@ function handlePieceMovement(keycode) {
     const nextPlayerPosition = player.nextPosition(keycode);
     const foundBox = findBoxAtPosition(nextPlayerPosition);
 
-    if (foundBox) {
+    if (foundBox === undefined) {
+        const playerCollision = verifyCollisions(nextPlayerPosition);
+
+        if (!playerCollision) {
+            player.moveTo(nextPlayerPosition);
+            updateMovesCounter();
+        }
+    } else {
         const nextBoxPosition = foundBox.nextPosition(keycode);
         const boxCollision = verifyCollisions(nextBoxPosition, boxes);
 
@@ -61,13 +68,6 @@ function handlePieceMovement(keycode) {
                 const message = `Parabéns!\n\nVocê concluiu o desfio em ${player.moves} passos!`
                 setTimeout(() => alert(message), 500);
             }
-        }
-    } else {
-        const playerCollision = verifyCollisions(nextPlayerPosition);
-
-        if (!playerCollision) {
-            player.moveTo(nextPlayerPosition);
-            updateMovesCounter();
         }
     }
 }
