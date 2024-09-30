@@ -13,7 +13,9 @@ const NUM_ROWS = boardMap.length;
 const NUM_COLS = boardMap[0].length;
 
 export function buildGameBoard() {
-    const pieces = {};
+    const pieces = {
+        boxes: []
+    };
 
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
@@ -25,11 +27,13 @@ export function buildGameBoard() {
             const cell = createGameElement('div', 'cell', row);
 
             const char = boardMap[i][j];
+            const position = { x: j, y: i }
 
             if (char === '#') cell.classList.add('wall');
             if (char === 'G') cell.classList.add('goal');
             if (char === 'B') cell.classList.add('block');
-            if (char === 'P') pieces.player = { x: i, y: j };
+            if (char === 'P') pieces.player = position;
+            if (char === 'B') pieces.boxes.push(position);
         }
     }
 
