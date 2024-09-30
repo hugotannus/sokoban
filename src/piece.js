@@ -22,8 +22,8 @@ function Piece(posX, posY) {
         this.updateElementPosition();
     }
 
-    this.insertElementInto = function (parentElement, className) {
-        this.element = createGameElement(className, parentElement);
+    this.setElement = function (pieceElement) {
+        this.element = pieceElement;
         this.updateElementPosition();
     }
 
@@ -38,3 +38,5 @@ function Piece(posX, posY) {
         return `${qtd * DIST_SALTO + MARGIN_FIX}px`;
     }
 }
+
+export default Piece;

@@ -1,5 +1,6 @@
-const { pieces, numberOfGoals } = buildGameBoard(boardMap);
-const board = document.querySelector('.board');
+import { buildGameBoard, createBoardPiece } from './board.js';
+
+const { boardMap, pieces, numberOfGoals } = buildGameBoard();
 
 const player = createBoardPiece(pieces.player, 'player');
 const boxes = pieces.boxes.map(box => createBoardPiece(box));

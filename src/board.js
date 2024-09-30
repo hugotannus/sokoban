@@ -1,3 +1,5 @@
+import Piece from "./piece.js";
+
 const boardMap = [
     [" ", " ", "#", "#", "#", "#", "#"],
     ["#", "#", "#", "P", ".", ".", "#"],
@@ -9,13 +11,6 @@ const boardMap = [
     [" ", "#", "#", "#", "#", "#"]
 ];
 
-function createBoardPiece(position, className = 'box') {
-    const piece = new Piece(position.x, position.y);
-    piece.insertElementInto(board, className);
-
-    return piece
-}
-
 function createGameElement(classList, parentNode, elementName = 'div') {
     const element = document.createElement(elementName);
     element.classList.add(classList);
@@ -24,19 +19,29 @@ function createGameElement(classList, parentNode, elementName = 'div') {
     return element;
 }
 
-function buildGameBoard(boardMap) {
+export function createBoardPiece(position, className = 'box') {
+    const board = document.querySelector('.board');
+
+    const piece = new Piece(position.x, position.y);
+    const pieceElement = createGameElement(className, board);
+
+    piece.setElement(pieceElement);
+
+    return piece
+}
+
+export function buildGameBoard() {
     const game = document.getElementById("game");
     const board = createGameElement('board', game);
     const numRows = boardMap.length;
-    
+
     let player = null, boxes = [], numberOfGoals = 0;
-    
+
     for (let i = 0; i < numRows; i++) {
         const row = createGameElement('row', board);
         const numCols = boardMap[i].length;
-        
+
         for (let j = 0; j < numCols; j++) {
-            // Simplifica acesso à propriedade `classList` a adicionar nova célula ao tabuleiro.
             const { classList } = createGameElement('cell', row);
 
             const char = boardMap[i][j];
@@ -53,5 +58,5 @@ function buildGameBoard(boardMap) {
         }
     }
 
-    return { numberOfGoals, pieces: { player, boxes } }
+    return { boardMap, numberOfGoals, pieces: { player, boxes } }
 }
