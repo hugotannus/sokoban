@@ -3,7 +3,6 @@ import { buildGameBoard } from './board.js';
 const { boardMap, numberOfGoals, pieces: { player, boxes } } = buildGameBoard();
 
 let moves = 0;
-let boxesOnGoal = 0;
 
 window.addEventListener("keydown", function (event) {
     event.preventDefault();
@@ -28,19 +27,21 @@ function verifyCollisions(position, pieces = null) {
     return hasWallCollision || hasAnotherPiece;
 }
 
+function countBoxesOnGoal() {
+    return boxes.reduce(function (count, { x: j, y: i }) {
+        return count + Number(boardMap[i][j] == 'G')
+    }, 0);
+}
+
 function updateMovesCounter() {
     document.getElementById('moves').innerText = ++moves;
 }
 
 function updateBoxesOnGoalStats() {
-    boxesOnGoal = 0;
-
-    for (let position of boxes) {
-        let { x: j, y: i } = position;
-        if (boardMap[i][j] === 'G') boxesOnGoal++;
-    }
-
+    let boxesOnGoal = countBoxesOnGoal();
     document.getElementById('goals').innerText = boxesOnGoal;
+
+    return boxesOnGoal;
 }
 
 function handlePieceMovement(keycode) {
@@ -52,14 +53,16 @@ function handlePieceMovement(keycode) {
         const boxCollision = verifyCollisions(nextBoxPosition, boxes);
 
         if (!boxCollision) {
+            const boxesOnGoal = updateBoxesOnGoalStats();
+            
+            updateMovesCounter();
+            
             foundBox.moveTo(nextBoxPosition);
             player.moveTo(nextPlayerPosition);
 
-            updateMovesCounter();
-            updateBoxesOnGoalStats();
-
             if (numberOfGoals === boxesOnGoal) {
-                setTimeout(() => alert("Você concluiu o desafio!"), 500);
+                const message = `Parabéns!\n\nVocê concluiu o desfio em ${moves} passos!`
+                setTimeout(() => alert(message), 500);
             }
         }
     } else {
