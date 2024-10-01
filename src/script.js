@@ -5,12 +5,11 @@ const pieces = buildGameBoard();
 const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');
+const boxes = [];
 
-function createBoardPiece(piecePosition, className) {
-    const piece = new Piece(piecePosition.x, piecePosition.y);
-    piece.insertElementInto(className, board);
-    
-    return piece;
+for (let box of pieces.boxes) {
+    let piece = createBoardPiece(box, 'box');
+    boxes.push(piece);
 }
 
 window.addEventListener("keydown", function (event) {
@@ -21,6 +20,13 @@ window.addEventListener("keydown", function (event) {
         player.moveTo(next);
     }
 });
+
+function createBoardPiece(piecePosition, className) {
+    const piece = new Piece(piecePosition.x, piecePosition.y);
+    piece.insertElementInto(className, board);
+
+    return piece;
+}
 
 function verifyPosition(position) {
     let { x: j, y: i } = position;
