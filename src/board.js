@@ -17,6 +17,8 @@ export function buildGameBoard() {
         boxes: []
     };
 
+    let numberOfGoals = 0;
+
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
 
@@ -30,14 +32,16 @@ export function buildGameBoard() {
             const position = { x: j, y: i }
 
             if (char === '#') cell.classList.add('wall');
-            if (char === 'G') cell.classList.add('goal');
-            // if (char === 'B') cell.classList.add('block');
             if (char === 'P') pieces.player = position;
             if (char === 'B') pieces.boxes.push(position);
+            if (char === 'G') {
+                cell.classList.add('goal');
+                numberOfGoals++;
+            }
         }
     }
 
-    return pieces;
+    return { pieces, numberOfGoals };
 }
 
 export function createGameElement(elementName, className, parentNode) {

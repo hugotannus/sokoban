@@ -1,7 +1,7 @@
 import Piece from "./piece.js";
 import { buildGameBoard, boardMap } from "./board.js";
 
-const pieces = buildGameBoard();
+const { pieces, numberOfGoals } = buildGameBoard();
 const board = document.querySelector('.board');
 
 const player = createBoardPiece(pieces.player, 'player');
@@ -23,6 +23,10 @@ function findBoxAtPosition(pos) {
     return boxes.find((caixa) => caixa.x === pos.x && caixa.y === pos.y);
 }
 
+function levantaAPlaquinha() {
+    alert("Você venceu!");
+}
+
 function handlePieceMovement(keycode){
     const nextPlayerPosition = player.nextPosition(keycode);
     const caixa = findBoxAtPosition(nextPlayerPosition);
@@ -40,8 +44,8 @@ function handlePieceMovement(keycode){
 
             console.log(qtdCaixasCertas);
 
-            if(qtdCaixasCertas == 3) {
-                alert("Você venceu!");
+            if(qtdCaixasCertas == numberOfGoals) {
+                setTimeout(levantaAPlaquinha, 300);
             }
         }
     } else {
