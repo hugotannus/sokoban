@@ -13,13 +13,35 @@ for (let box of pieces.boxes) {
 }
 
 window.addEventListener("keydown", function (event) {
-    event.preventDefault();
-    const next = player.nextPosition(event.code);
+    // event.preventDefault();
 
-    if (verifyPosition(next)) {
-        player.moveTo(next);
-    }
+    handlePieceMovement(event.code);
 });
+
+function findBoxAtPosition(pos) {
+    // modificar linha(s) de código abaixo
+    return boxes.find((caixa) => caixa.x === pos.x && caixa.y === pos.y);
+}
+
+function handlePieceMovement(keycode){
+    const nextPlayerPosition = player.nextPosition(keycode);
+    const caixa = findBoxAtPosition(nextPlayerPosition);
+
+    if(caixa) {
+        const nextCaixaPosition = caixa.nextPosition(keycode);
+        const outraCaixa = findBoxAtPosition(nextCaixaPosition);
+        const caixaCanMove = verifyCollision(nextCaixaPosition);
+
+        if(caixaCanMove && !outraCaixa) {
+            caixa.moveTo(nextCaixaPosition);
+            player.moveTo(nextPlayerPosition);
+        }
+    } else {
+        const playerCanMove = verifyCollision(nextPlayerPosition);
+
+        if (playerCanMove) player.moveTo(nextPlayerPosition);
+    }
+}
 
 function createBoardPiece(piecePosition, className) {
     const piece = new Piece(piecePosition.x, piecePosition.y);
@@ -28,7 +50,7 @@ function createBoardPiece(piecePosition, className) {
     return piece;
 }
 
-function verifyPosition(position) {
+function verifyCollision(position) {
     let { x: j, y: i } = position;
 
     return boardMap[i][j] !== '#';
