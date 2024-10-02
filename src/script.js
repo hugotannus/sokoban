@@ -30,14 +30,22 @@ function handlePieceMovement(keycode){
     if(caixa) {
         const nextCaixaPosition = caixa.nextPosition(keycode);
         const outraCaixa = findBoxAtPosition(nextCaixaPosition);
-        const caixaCanMove = verifyCollision(nextCaixaPosition);
+        const caixaCanMove = verifyPosition(nextCaixaPosition);
 
         if(caixaCanMove && !outraCaixa) {
             caixa.moveTo(nextCaixaPosition);
             player.moveTo(nextPlayerPosition);
+
+            const qtdCaixasCertas = contagemDeCaixasCorretas();
+
+            console.log(qtdCaixasCertas);
+
+            if(qtdCaixasCertas == 3) {
+                alert("Você venceu!");
+            }
         }
     } else {
-        const playerCanMove = verifyCollision(nextPlayerPosition);
+        const playerCanMove = verifyPosition(nextPlayerPosition);
 
         if (playerCanMove) player.moveTo(nextPlayerPosition);
     }
@@ -50,8 +58,20 @@ function createBoardPiece(piecePosition, className) {
     return piece;
 }
 
-function verifyCollision(position) {
+function verifyPosition(position) {
     let { x: j, y: i } = position;
 
     return boardMap[i][j] !== '#';
+}
+
+function contagemDeCaixasCorretas(){
+    let count = 0;
+
+    for(const position of boxes) {
+        let { x: j, y: i } = position;
+
+        if(boardMap[i][j] === 'G') count++;
+    }
+
+    return count;
 }
