@@ -13,39 +13,33 @@ for (let box of pieces.boxes) {
 }
 
 window.addEventListener("keydown", function (event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     handlePieceMovement(event.code);
 });
 
-/** Tarefa #1: implementar função para localizar uma caixa à partir de um
- * uma dada coordenada.
-*/
-function findBoxAtPosition(position) {
+function findBoxAtPosition(pos) {
     // modificar linha(s) de código abaixo
-    return null;
+    return boxes.find((caixa) => caixa.x === pos.x && caixa.y === pos.y);
 }
 
-/** Tarefa #2: modificar a função abaixo de forma a tratar tando a movimentação
- * do jogador quanto das caixas.
-*/
 function handlePieceMovement(keycode){
-    // Variável destinada ao pré-cálculo da posição do jogador
-    const next = player.nextPosition(keycode);
-    // (Modificar) Variável para detectar a "presença" de outra peça
-    const foundPice = null;
+    const nextPlayerPosition = player.nextPosition(keycode);
+    const caixa = findBoxAtPosition(nextPlayerPosition);
 
-    // Implementar lógica caso encontre uma outra peça no caminho.
-    if(foundPice) {
+    if(caixa) {
+        const nextCaixaPosition = caixa.nextPosition(keycode);
+        const outraCaixa = findBoxAtPosition(nextCaixaPosition);
+        const caixaCanMove = verifyCollision(nextCaixaPosition);
 
-    }
-    // E caso não encontre outra peça...
-    else {
-        // Faça as modificações que forem necessárias para manter o
-        // funcionamento do jogo.
-        if (verifyPosition(next)) {
-            player.moveTo(next);
+        if(caixaCanMove && !outraCaixa) {
+            caixa.moveTo(nextCaixaPosition);
+            player.moveTo(nextPlayerPosition);
         }
+    } else {
+        const playerCanMove = verifyCollision(nextPlayerPosition);
+
+        if (playerCanMove) player.moveTo(nextPlayerPosition);
     }
 }
 
@@ -56,7 +50,7 @@ function createBoardPiece(piecePosition, className) {
     return piece;
 }
 
-function verifyPosition(position) {
+function verifyCollision(position) {
     let { x: j, y: i } = position;
 
     return boardMap[i][j] !== '#';
