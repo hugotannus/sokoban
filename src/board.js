@@ -1,12 +1,9 @@
-import { mapa1, mapa2 } from "./mapas.js";
-
 function string2BoardMap(level) {
     return level.trim().split('\n');
 }
 
-const boardMap = string2BoardMap(mapa1);
-
-export function buildGameBoard() {
+export function buildGameBoard(mapa) {
+    const boardMap = string2BoardMap(mapa);
     const pieces = {
         boxes: []
     };
