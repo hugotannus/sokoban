@@ -9,20 +9,31 @@ export const boardMap = [
     ["#", "#", "#", "#", "#", "#", "#", "#"]
 ];
 
-const NUM_ROWS = boardMap.length;
-const NUM_COLS = boardMap[0].length;
+export const lvl0 = `
+__#####
+###P..#
+#..B#.##
+#.#GB..#
+#..G.#.#
+##.#...#
+_#...###
+_#####
+`
+
 
 export function buildGameBoard() {
     const pieces = {
         boxes: []
     };
-
+    
     let numberOfGoals = 0;
-
+    
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
-
+    const NUM_ROWS = boardMap.length;
+    
     for (let i = 0; i < NUM_ROWS; i++) {
+        const NUM_COLS = boardMap[i].length;
         const row = createGameElement('div', 'row', board);
 
         for (let j = 0; j < NUM_COLS; j++) {
