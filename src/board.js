@@ -4,7 +4,7 @@ function string2BoardMap(level) {
     return level.trim().split('\n');
 }
 
-export const boardMap = string2BoardMap(mapa1);
+const boardMap = string2BoardMap(mapa1);
 
 export function buildGameBoard() {
     const pieces = {
@@ -39,7 +39,7 @@ export function buildGameBoard() {
         }
     }
 
-    return { pieces, numberOfGoals };
+    return { boardMap, pieces, numberOfGoals };
 }
 
 export function createGameElement(elementName, className, parentNode) {
