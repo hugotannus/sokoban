@@ -5,9 +5,14 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: inherit;
+}
+
+button {
+    font-size: 20px;
 }
 
 #game {

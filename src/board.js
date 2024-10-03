@@ -11,6 +11,8 @@ export function buildGameBoard(mapa) {
     let numberOfGoals = 0;
     
     const game = document.getElementById("game");
+    game.innerHTML = null;
+
     const board = createGameElement('div', 'board', game);
     const NUM_ROWS = boardMap.length;
     
