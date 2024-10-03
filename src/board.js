@@ -48,6 +48,8 @@ export function buildGameBoard() {
             const position = { x: j, y: i }
 
             if (char === '#') cell.classList.add('wall');
+            if (char === '_') cell.classList.add('empty');
+            if (char === ' ') cell.classList.add('empty');
             if (char === 'P') pieces.player = position;
             if (char === 'B') pieces.boxes.push(position);
             if (char === 'G') {
