@@ -1,22 +1,17 @@
 import Piece from "./piece.js";
 
-export function buildGameBoard(mapa) {
-    const boardMap = mapa.trim().split('\n');
-    const pieces = {
-        boxes: []
-    };
-    
-    let numberOfGoals = 0;
-    
+export function buildGameBoard(level) {
+    const boardMap = level.trim().split('\n');
+
     const game = document.getElementById("game");
     const board = createGameElement('div', 'board', game);
-    const NUM_ROWS = boardMap.length;
+
+    let numberOfGoals = 0, boxes = [], player = null;
     
-    for (let i = 0; i < NUM_ROWS; i++) {
-        const NUM_COLS = boardMap[i].length;
+    for (let i = 0; i < boardMap.length; i++) {
         const row = createGameElement('div', 'row', board);
 
-        for (let j = 0; j < NUM_COLS; j++) {
+        for (let j = 0; j < boardMap[i].length; j++) {
             const cell = createGameElement('div', 'cell', row);
 
             const char = boardMap[i][j];
@@ -25,8 +20,8 @@ export function buildGameBoard(mapa) {
             if (char === '#') cell.classList.add('wall');
             if (char === '_') cell.classList.add('empty');
             if (char === ' ') cell.classList.add('empty');
-            if (char === 'P') pieces.player = createBoardPiece(position, 'player');
-            if (char === 'B') pieces.boxes.push(createBoardPiece(position, 'box'));
+            if (char === 'P') player = createBoardPiece(position, 'player');
+            if (char === 'B') boxes.push(createBoardPiece(position, 'box'));
             if (char === 'G') {
                 cell.classList.add('goal');
                 numberOfGoals++;
@@ -34,7 +29,7 @@ export function buildGameBoard(mapa) {
         }
     }
 
-    return { boardMap, pieces, numberOfGoals };
+    return { boardMap, pieces: { boxes, player }, numberOfGoals };
 }
 
 export function createGameElement(elementName, className, parentNode) {
