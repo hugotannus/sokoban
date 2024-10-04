@@ -1,13 +1,13 @@
 import Piece from "./piece.js";
 
-export function buildGameBoard(level) {
+export function buildGameBoard(level, boardId) {
     const boardMap = level.trim().split('\n');
 
-    const game = document.getElementById("game");
-    const board = createGameElement('div', 'board', game);
-
     let numberOfGoals = 0, boxes = [], player = null;
-    
+
+    const game = document.getElementById("game");
+    const board = createGameElement('div', 'board', game, boardId);
+
     for (let i = 0; i < boardMap.length; i++) {
         const row = createGameElement('div', 'row', board);
 
@@ -32,10 +32,12 @@ export function buildGameBoard(level) {
     return { boardMap, pieces: { boxes, player }, numberOfGoals };
 }
 
-export function createGameElement(elementName, className, parentNode) {
+export function createGameElement(elementName, className, parentNode, elementId) {
     const element = document.createElement(elementName);
     element.classList.add(className);
     parentNode.append(element);
+
+    if(elementId) element.id = elementId;
 
     return element;
 }

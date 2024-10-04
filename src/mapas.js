@@ -1,4 +1,4 @@
-export const mapa1 = `
+export const lvl1 = `
 __#####
 ###P..#
 #..B#.##
@@ -9,7 +9,7 @@ _#...###
 _#####
 `
 
-export const mapa2 = `
+export const lvl2 = `
 __#####
 ###P..#
 #..B#.##
