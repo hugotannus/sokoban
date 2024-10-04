@@ -1,3 +1,5 @@
+import Piece from "./piece.js";
+
 export function buildGameBoard(mapa) {
     const boardMap = mapa.trim().split('\n');
     const pieces = {
@@ -23,8 +25,8 @@ export function buildGameBoard(mapa) {
             if (char === '#') cell.classList.add('wall');
             if (char === '_') cell.classList.add('empty');
             if (char === ' ') cell.classList.add('empty');
-            if (char === 'P') pieces.player = position;
-            if (char === 'B') pieces.boxes.push(position);
+            if (char === 'P') pieces.player = createBoardPiece(position, 'player');
+            if (char === 'B') pieces.boxes.push(createBoardPiece(position, 'box'));
             if (char === 'G') {
                 cell.classList.add('goal');
                 numberOfGoals++;
@@ -41,4 +43,13 @@ export function createGameElement(elementName, className, parentNode) {
     parentNode.append(element);
 
     return element;
+}
+
+function createBoardPiece(piecePosition, className) {
+    const board = document.querySelector('.board');
+    const piece = new Piece(piecePosition.x, piecePosition.y);
+    
+    piece.insertElementInto(className, board);
+
+    return piece;
 }

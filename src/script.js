@@ -1,17 +1,8 @@
-import Piece from "./piece.js";
 import { buildGameBoard } from "./board.js";
 import { mapa1, mapa2 } from "./mapas.js";
 
 const { boardMap, pieces, numberOfGoals } = buildGameBoard(mapa1);
-const board = document.querySelector('.board');
-
-const player = createBoardPiece(pieces.player, 'player');
-const boxes = [];
-
-for (let box of pieces.boxes) {
-    let piece = createBoardPiece(box, 'box');
-    boxes.push(piece);
-}
+const { player, boxes } = pieces;
 
 window.addEventListener("keydown", function (event) {
     handlePieceMovement(event.code);
@@ -41,13 +32,6 @@ function handlePieceMovement(keycode){
 
         if (playerCanMove) player.moveTo(nextPlayerPosition);
     }
-}
-
-function createBoardPiece(piecePosition, className) {
-    const piece = new Piece(piecePosition.x, piecePosition.y);
-    piece.insertElementInto(className, board);
-
-    return piece;
 }
 
 function verifyPosition(position) {
