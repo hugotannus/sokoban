@@ -1,9 +1,5 @@
-function string2BoardMap(level) {
-    return level.trim().split('\n');
-}
-
 export function buildGameBoard(mapa) {
-    const boardMap = string2BoardMap(mapa);
+    const boardMap = mapa.trim().split('\n');
     const pieces = {
         boxes: []
     };

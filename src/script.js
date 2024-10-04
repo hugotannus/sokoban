@@ -14,18 +14,11 @@ for (let box of pieces.boxes) {
 }
 
 window.addEventListener("keydown", function (event) {
-    // event.preventDefault();
-
     handlePieceMovement(event.code);
 });
 
 function findBoxAtPosition(pos) {
-    // modificar linha(s) de código abaixo
     return boxes.find((caixa) => caixa.x === pos.x && caixa.y === pos.y);
-}
-
-function levantaAPlaquinha() {
-    alert("Você venceu!");
 }
 
 function handlePieceMovement(keycode){
@@ -41,13 +34,7 @@ function handlePieceMovement(keycode){
             caixa.moveTo(nextCaixaPosition);
             player.moveTo(nextPlayerPosition);
 
-            const qtdCaixasCertas = contagemDeCaixasCorretas();
-
-            console.log(qtdCaixasCertas);
-
-            if(qtdCaixasCertas == numberOfGoals) {
-                setTimeout(levantaAPlaquinha, 300);
-            }
+            if(levelCompleted()) setTimeout(() => alert("Você venceu!"), 250);
         }
     } else {
         const playerCanMove = verifyPosition(nextPlayerPosition);
@@ -69,7 +56,7 @@ function verifyPosition(position) {
     return boardMap[i][j] !== '#';
 }
 
-function contagemDeCaixasCorretas(){
+function levelCompleted(){
     let count = 0;
 
     for(const position of boxes) {
@@ -78,5 +65,5 @@ function contagemDeCaixasCorretas(){
         if(boardMap[i][j] === 'G') count++;
     }
 
-    return count;
+    return count == numberOfGoals;
 }
